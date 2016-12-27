@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+    <title>众行位置</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/userlist.css">
+    <link rel="stylesheet" href="css/drawing.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script async src="http://c.cnzz.com/core.php"></script>
+    <script src="js/jquery-2.1.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/app.js"></script>
+    <script type="text/javascript" src="js/app_config.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/appMain.js"></script>
+    <script type="text/javascript" src="js/fusioncharts.js"></script>
+    <script type="text/javascript" src="js/themes/fusioncharts.theme.fint.js"></script>
+    <script type="text/javascript" src="js/CookieUtil.js"></script>
+    <script type="text/javascript" src="js/maps/convertor_bdmap.js"></script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Fpa3NVkGHqQgWMl6cHxEr5wq"></script>
+    <!--加载鼠标绘制工具-->
+    <script type="text/javascript" src="js/draw_user.js"></script>
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/library/DrawingManager/1.4/src/DrawingManager_min.js"></script>-->
+    <!--//设置秘钥-->
+    <!--<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=HmLRRAfGqOuxzqFk5iGF0hUtdbWByE1U"></script>-->
+    <style type="text/css">
+        body, html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: "微软雅黑";
+
+        }
+        #map {
+            max-width: none;
+            width: 100%;
+            height: 100%;
+
+        }
+        .baidu-maps label {
+            max-width: none;
+        }
+    </style>
+
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=Fpa3NVkGHqQgWMl6cHxEr5wq"></script>
+    <title>老人位置</title>
+</head>
+<body>
+<script src="js/themes/echart.js"></script>
+<script type="text/javascript">
+</script>
+<nav class="navbar  navbar-fixed-top">
+    <!-- We use the fluid option here to avoid overriding the fixed width of a normal container within the narrow content columns. -->
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-6" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"> 康泰之家</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-5">
+            <p class="navbar-text navbar-right"></p>
+        </div>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <aside class="sidebar">
+        <!-- 这是侧栏的切换 -->
+        <div class="side-nav"style="z-index:3000">
+            <ul>
+                <li id="xinlv">
+                    <i class="icon--015"></i>
+                    <span class="tab-title"><p></p>心率</span>
+                </li>
+                <li id="steps">
+                    <i class="icon--019"></i>
+                    <span  class="tab-title"><p></p>步数</span>
+                </li>
+                <li id="history">
+                    <i class="icon--016"></i>
+                    <span  class="tab-title"><p></p>轨迹</span>
+                </li>
+                <li id="bianliang">
+                    <i class="icon--0123"></i>
+                    <span class="tab-title"><p></p>设置</span>
+                </li>
+                <li id="weilan">
+                    <i class="icon--018"></i>
+                    <span class="tab-title"><p></p>围栏</span>
+                </li>
+                <li id="qingchu">
+                    <i class="icon--0113"></i>
+                    <span class="tab-title">清空围栏</span>
+                </li>
+            </ul>
+        </div>
+        <!-- 这是侧栏的用户列表部分 -->
+        <div id="users" class="users">
+            <div style="z-index: 1">
+                <div class="up_down" id="up_down">
+                    <img src="images/plan_up.png" width="28px" height="150px"></img>
+                </div>
+                <div class="users-header" style="font-size: 28px" ><p><img src="images/user_17.png" width="28px" height="28px"></img> 用户列表</p></div>
+                <div class="search">
+                    <input type="text" placeholder="搜索用户">
+                 </div>
+                    <ul id="user_list" class="user-list"></ul>
+
+            <!--选择按钮-->
+                <div  class="box"  style="font-size: 18px "><img src="images/select_90.png" align="5px"> 选择 </div>
+            </div>
+        </div>
+    </aside>
+
+
+    <div class="content" id ="content">
+        <div style="width:100%; height:100%; position:fixed; left:40px; top:40px;">
+            <div class="baidu-maps" id="map"></div>
+<!--心率图表-->
+            <div  class="xin" id="xin" ></div>
+                <script src="js/themes/echart.js"></script>
+                <script type="text/javascript">
+                    // 路径配置
+                    
+                </script>
+
+            <div id="w_info">
+                <div id="info" class="info">
+                    <div id="warning_info" class="info-content">
+                        <p>用户：</p>
+                        <p>心率：</p>
+                        <p>位置：</p>
+                        <p>时间：</p>
+                    </div>
+                </div>
+                <div class="title" >告警信息</div>
+            </div>
+            <input type="date">
+        </div>
+    </div>
+
+    <div style="width:100%" class="modal fade" id="step_count" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog" style="width:100%">
+          <div id="content" class="modal-content">
+            <div id="chartContainer_sc">
+                
+            </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default"
+                  data-dismiss="modal">关闭
+               </button>
+            </div>
+          </div><!-- /.modal-content -->
+
+
+        </div><!-- /.modal -->
+    </div>
+
+
+    <div style="width:100%" class="modal fade" id="heart_rate" tabindex="-1" role="dialog"
+       aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog" style="width:100%">
+          <div id="content" class="modal-content">
+            <div id="chartContainer_hr">
+                
+            </div>
+             <div class="modal-footer">
+               <button type="button" class="btn btn-default"
+                  data-dismiss="modal">关闭
+               </button>
+            </div>
+          </div><!-- /.modal-content -->
+
+
+        </div><!-- /.modal -->
+    </div>
+    <div class="shezhi">
+        <form action='' method="post" onsubmit='javascript:return check_radio()'>
+            <input type='radio' value='24' name='time' checked='checked'>24小时<br>
+            <input type='radio' value='12' name='time'>12小时<br>
+            <input type='radio' name='time' class="zidingyi">自定义时间<br>
+           <button class="definetime">提交</button>
+        </form>
+    </div>
+    <div class="dingyi" style="display: none">
+         <form>
+             时间：<input type="text" name="time2"/>小时
+             <button class="deftime">提交</button>
+         </form>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("map",{enableMapClick:false});
+    map.centerAndZoom(new BMap.Point(116.404, 39.915), 12);
+    map.enableScrollWheelZoom(true);
+    var overlays = [];
+    var overlaycomplete = function(e){
+        overlays.push(e.overlay);
+    };
+    var styleOptions = {
+        strokeColor:"red",    //边线颜色。
+//        fillColor:"red",      //填充颜色。当参数为空时，圆形将没有填充效果。
+        strokeWeight: 3,       //边线的宽度，以像素为单位。
+        strokeOpacity: 0.8,	   //边线透明度，取值范围0 - 1。
+        fillOpacity: 0.6,      //填充的透明度，取值范围0 - 1。
+        strokeStyle: 'solid' //边线的样式，solid或dashed。
+    }
+</script>

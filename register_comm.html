@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+
+    <meta charset="utf-8">
+    <title>康泰社区</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="css/supersized.css">
+    <link rel="stylesheet" href="css/login.css">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+    <script src="js/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.form.js"></script>
+    <script type="text/javascript" src="js/tooltips.js"></script>
+    <!-- <script type="text/javascript" src="js/login.js"></script> -->
+    <script type="text/javascript" src="js/city.js"></script>
+    <script type="text/javascript" src="js/CookieUtil.js"></script>
+</head>
+
+<body>
+
+<div class="page-container">
+    <div class="main_box">
+        <div class="login_box">
+            <div class="login_logo" style="font-size: 28px">社区注册
+
+                <!--<img src="images/logo.png" >-->
+            </div>
+
+            <div class="login_form">
+                <form action="insert_comm.php" id="login_form" method="post">
+                    <div class="form-group">
+                        <label for="j_remember" class="t">选择地区：</label>
+
+                        <select id="seprovince" values="">
+                            <option>--请选择省份--</option>
+                        </select>
+                        <select id="secity">
+                            <option>--请选择地市--</option>
+                        </select>
+                        <p></p>
+                        <select id="searea" class="sele">
+                            <option>--请选择区县--</option>
+                        </select>
+                        <select id="secomm" class="sel">
+                            <option>--请选择街道--</option>
+                        </select>
+                        <!--<input id="j_remember" type="checkbox" value="true">&nbsp;记住登陆账号!</label>-->
+                    </div>
+                    <div class="form-dingyi">
+                        <label for="j_remember" class="t">自定义社区：</label>
+                        <input id="shequ" placeholder="社区"
+                               class="password form-control x319 in">
+                    </div>
+                    <div class="form-pwd">
+                        <label for="j_password" class="pwd">密　码：</label>
+                        <input id="pwd" placeholder="password"  name="pwd" type="password"
+                               class="password form-control x319 in pwd">
+                    </div>
+                    <div class="form-group tijiao">
+
+                        <button type="button"  id="submit_action"
+                                class="btn btn-primary btn-lg">&nbsp;提&nbsp;交&nbsp; </button>
+                        <!--<button type="button" class="btn btn-default btn-lg" onclick=window.open('register_comm.html')>&nbsp;注&nbsp;册&nbsp;</button>-->
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="bottom">Copyright &copy; 2015 - 2016 <a href="#">系统登陆</a></div>
+    </div>
+</div>
+
+<!-- Javascript -->
+
+<script src="js/supersized.3.2.7.min.js"></script>
+<script src="js/supersized-init.js"></script>
+<script src="js/scripts.js"></script>
+
+</body>
+</html>

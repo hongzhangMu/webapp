@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>社区注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/supersized.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrapValidator.css"/>
+
+    <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/bootstrapValidator.js"></script>
+    <script type="text/javascript" src="js/tooltips.js"></script>
+    <script type="text/javascript" src="js/city.js"></script>
+    <script type="text/javascript" src="js/CookieUtil.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <!-- form: -->
+            <section>
+                <div class="page-header">
+                    <h1>社区注册</h1>
+                </div>
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <form id="defaultForm" method="post" class="form-horizontal">
+                        <fieldset>
+                            <legend>用户名信息</legend>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">用户名</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="username" id="username" placeholder="用户名" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">密码</label>
+                                <div class="col-lg-5">
+                                    <input type="password" class="form-control" name="pwd" id="pwd" placeholder="密码" />
+                                </div>
+                            </div>
+
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>联系人信息</legend>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">联系人姓名</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="lianxiname" id="lianxiname" placeholder="联系人姓名" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">联系人手机号</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="lianxiphone" id="lianxiphone" placeholder="联系人手机号" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">社区办公电话</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="commphone" id="commphone" placeholder="社区办公电话" />
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">社区地址</label>
+                                <div class="col-lg-5">
+                                    <input type="text" class="form-control" name="commadd" id="commadd" placeholder="社区地址" />
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>个人社区</legend>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 control-label">选择地区：</label>
+                                <div class="col-lg-5">
+                                <select id="seprovince">
+                                    <option>--请选择省份--</option>
+                                </select>
+                                <select id="secity">
+                                    <option>--请选择地市--</option>
+                                </select>
+                                    <p></p>
+                                <select id="searea" class="sele">
+                                    <option>--请选择区县--</option>
+                                </select>
+                                <select id="secomm" class="sel">
+                                    <option>--请选择街道--</option>
+                                </select>
+                                </div>
+                                <!--<input id="j_remember" type="checkbox" value="true">&nbsp;记住登陆账号!</label>-->
+                            </div>
+                            <div class="form-group">
+                                <p></p>
+                                <label for="j_remember" class="col-lg-3 control-label">自定义社区：</label>
+                                <div class="col-lg-5">
+                                    <input type="text" id="shequ" class="form-control" name="commid" placeholder="自定义社区" />
+                                </div>
+                                <!--<input id="j_remember" type="checkbox" value="true">&nbsp;记住登陆账号!</label>-->
+                            </div>
+                        </fieldset>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">验证码：</label>
+                            <div class="col-lg-5"  id="J_down">
+                                <div class="checkcode">
+                                    <input type="text" id="J_codetext" placeholder="验证码" maxlength="4" onblur="validate()">
+                                    <canvas class="canvas" id="myCanvas" style="display: block" onclick="createCode()"></canvas>
+                                </div><!--<input type="text" class="form-control" name="commadd" id="commadd" placeholder="社区地址" />-->
+                            </div>
+                            <div class="col-lg-9 col-lg-offset-3">
+                                <p></p>
+                                <button type="button" id="submit_action" class="btn btn-primary">注册</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <!-- :form -->
+        </div>
+    </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+
+    $('#defaultForm').bootstrapValidator({
+        message: 'This value is not valid',
+        feedbackIcons: {
+            valid: 'glyphicon glyphicon-ok',
+            invalid: 'glyphicon glyphicon-remove',
+            validating: 'glyphicon glyphicon-refresh'
+        },
+        fields: {
+            username: {
+                message: '用户名不能为空',
+                validators: {
+                    notEmpty: {
+                        message: '用户名不能为空'
+                    },
+                    stringLength: {
+                        min: 6,
+                        max: 30,
+                        message: '用户名长度在6——30之间'
+                    },
+                    regexp: {
+                        regexp: /^[a-zA-Z0-9_\.]+$/,
+                        message: '非法字符'
+                    }
+                }
+            },
+            pwd: {
+                message: '密码不能为空',
+                validators: {
+                    notEmpty: {
+                        message: '密码不能为空'
+                    }
+                }
+            },
+            lianxiname: {
+                validators: {
+                    notEmpty: {
+                        message: '联系人不能为空'
+                    },
+
+
+                }
+            },
+        }
+            lianxiphone: {
+                validators: {
+                    notEmpty: {
+                        message: '联系人手机号不能为空'
+                    },
+                    regexp: {
+                        regexp: /^1[3|4|5|8][0-9]\d{4,8}$/,
+                        message: '请填写正确的手机号'
+                    }
+
+                }
+            },
+        }
+    });
+});
+</script>
+</body>
+</html>
